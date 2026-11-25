@@ -1,1 +1,1388 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#9674CE">
+
+    <meta name="description"
+          content="EduTrack - A colorful academic workspace for managing students, courses and enrollments.">
+
+    <title>EduTrack | Candy Campus</title>
+
+    <!-- GOOGLE FONTS -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- MAIN CSS -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<!-- ==========================================
+     INLINE SVG ICON LIBRARY
+=========================================== -->
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     class="svg-library"
+     aria-hidden="true">
+
+    <symbol id="icon-dashboard" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="7" height="7" rx="2"/>
+        <rect x="14" y="3" width="7" height="7" rx="2"/>
+        <rect x="3" y="14" width="7" height="7" rx="2"/>
+        <rect x="14" y="14" width="7" height="7" rx="2"/>
+    </symbol>
+
+    <symbol id="icon-students" viewBox="0 0 24 24">
+        <path d="M2 9l10-5 10 5-10 5z"/>
+        <path d="M6 11v6c4 3 8 3 12 0v-6"/>
+        <path d="M22 9v7"/>
+    </symbol>
+
+    <symbol id="icon-courses" viewBox="0 0 24 24">
+        <path d="M12 5v16"/>
+        <path d="M12 5C8 2 4 3 2 4v15c4-2 7-1 10 2
+                 3-3 6-4 10-2V4c-4-2-7-1-10 1z"/>
+    </symbol>
+
+    <symbol id="icon-enrollments" viewBox="0 0 24 24">
+        <rect x="5" y="4" width="14" height="17" rx="2"/>
+        <rect x="9" y="2" width="6" height="4" rx="1"/>
+        <path d="M9 13l2 2 5-5"/>
+    </symbol>
+
+    <symbol id="icon-users" viewBox="0 0 24 24">
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M2 21v-3a7 7 0 0 1 14 0v3"/>
+        <path d="M17 4a4 4 0 0 1 0 8M18 15a5 5 0 0 1 4 5"/>
+    </symbol>
+
+    <symbol id="icon-plus" viewBox="0 0 24 24">
+        <path d="M12 5v14M5 12h14"/>
+    </symbol>
+
+    <symbol id="icon-view" viewBox="0 0 24 24">
+        <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/>
+        <circle cx="12" cy="12" r="3"/>
+    </symbol>
+
+    <symbol id="icon-edit" viewBox="0 0 24 24">
+        <path d="M4 16L16 4l4 4L8 20H4z"/>
+        <path d="M14 6l4 4"/>
+    </symbol>
+
+    <symbol id="icon-delete" viewBox="0 0 24 24">
+        <path d="M3 6h18M9 6V3h6v3"/>
+        <path d="M5 6l1 15h12l1-15M10 10v7M14 10v7"/>
+    </symbol>
+
+    <symbol id="icon-check" viewBox="0 0 24 24">
+        <path d="M5 12l4 4L19 6"/>
+    </symbol>
+
+    <symbol id="icon-close" viewBox="0 0 24 24">
+        <path d="M6 6l12 12M18 6L6 18"/>
+    </symbol>
+
+    <symbol id="icon-search" viewBox="0 0 24 24">
+        <circle cx="10" cy="10" r="7"/>
+        <path d="M15 15l6 6"/>
+    </symbol>
+
+    <symbol id="icon-refresh" viewBox="0 0 24 24">
+        <path d="M20 8a8 8 0 1 0 0 8M20 3v5h-5"/>
+    </symbol>
+
+    <symbol id="icon-moon" viewBox="0 0 24 24">
+        <path d="M20 15A9 9 0 0 1 9 4a9 9 0 1 0 11 11z"/>
+    </symbol>
+
+    <symbol id="icon-sun" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M2 12h2M20 12h2
+                 M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>
+    </symbol>
+
+    <symbol id="icon-menu" viewBox="0 0 24 24">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+    </symbol>
+
+    <symbol id="icon-arrow" viewBox="0 0 24 24">
+        <path d="M4 12h16M14 6l6 6-6 6"/>
+    </symbol>
+
+    <symbol id="icon-grid" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="8" height="8" rx="2"/>
+        <rect x="13" y="3" width="8" height="8" rx="2"/>
+        <rect x="3" y="13" width="8" height="8" rx="2"/>
+        <rect x="13" y="13" width="8" height="8" rx="2"/>
+    </symbol>
+
+    <symbol id="icon-table" viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="16" rx="2"/>
+        <path d="M3 9h18M3 14h18M9 4v16"/>
+    </symbol>
+
+    <symbol id="icon-database" viewBox="0 0 24 24">
+        <ellipse cx="12" cy="5" rx="9" ry="3"/>
+        <path d="M3 5v14c0 4 18 4 18 0V5"/>
+        <path d="M3 12c0 4 18 4 18 0"/>
+    </symbol>
+
+    <symbol id="icon-calendar" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="16" rx="2"/>
+        <path d="M7 2v6M17 2v6M3 10h18"/>
+    </symbol>
+
+    <symbol id="icon-alert" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 7v6M12 17h.01"/>
+    </symbol>
+
+    <symbol id="icon-sparkles" viewBox="0 0 24 24">
+        <path d="M12 2l2.5 7.5L22 12l-7.5 2.5L12 22
+                 l-2.5-7.5L2 12l7.5-2.5z"/>
+    </symbol>
+
+    <symbol id="icon-clock" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 6v6l4 2"/>
+    </symbol>
+
+</svg>
+
+
+<!-- ==========================================
+     MOBILE SIDEBAR OVERLAY
+=========================================== -->
+
+<div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+
+<!-- ==========================================
+     SIDEBAR
+=========================================== -->
+
+<aside id="sidebar" class="sidebar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            <svg class="icon">
+                <use href="#icon-students"></use>
+            </svg>
+        </div>
+
+        <div class="brand-text">
+            <h2>Edu<span>Track</span></h2>
+            <small>CANDY CAMPUS</small>
+        </div>
+
+    </div>
+
+    <div class="workspace-label">
+        <span class="mini-sparkle">✦</span>
+        ACADEMIC WORKSPACE
+    </div>
+
+    <nav id="navigation" aria-label="Main navigation">
+
+        <button class="nav-button active"
+                data-page="dashboard"
+                aria-current="page">
+
+            <span class="nav-icon lavender">
+                <svg class="icon">
+                    <use href="#icon-dashboard"></use>
+                </svg>
+            </span>
+
+            <span>Dashboard</span>
+
+            <span class="nav-indicator"></span>
+
+        </button>
+
+        <button class="nav-button"
+                data-page="students">
+
+            <span class="nav-icon pink">
+                <svg class="icon">
+                    <use href="#icon-students"></use>
+                </svg>
+            </span>
+
+            <span>Students</span>
+
+            <span class="nav-indicator"></span>
+
+        </button>
+
+        <button class="nav-button"
+                data-page="courses">
+
+            <span class="nav-icon blue">
+                <svg class="icon">
+                    <use href="#icon-courses"></use>
+                </svg>
+            </span>
+
+            <span>Courses</span>
+
+            <span class="nav-indicator"></span>
+
+        </button>
+
+        <button class="nav-button"
+                data-page="enrollments">
+
+            <span class="nav-icon mint">
+                <svg class="icon">
+                    <use href="#icon-enrollments"></use>
+                </svg>
+            </span>
+
+            <span>Enrollments</span>
+
+            <span class="nav-indicator"></span>
+
+        </button>
+
+    </nav>
+
+
+    <!-- SIDEBAR ACADEMIC ILLUSTRATION -->
+
+    <div class="sidebar-bottom">
+
+        <div class="study-card">
+
+            <svg class="study-art"
+                 viewBox="0 0 200 145"
+                 aria-hidden="true">
+
+                <circle cx="100" cy="72" r="58"
+                        fill="#E9DBFF"/>
+
+                <ellipse cx="100" cy="127"
+                         rx="63" ry="8"
+                         fill="#9674CE" opacity=".15"/>
+
+                <!-- BOOK -->
+
+                <rect x="38" y="98" width="124"
+                      height="25" rx="7"
+                      fill="#A8DCCB"/>
+
+                <rect x="49" y="104" width="103"
+                      height="13" rx="3"
+                      fill="#F3FFF9"/>
+
+                <!-- SECOND BOOK -->
+
+                <rect x="48" y="77" width="107"
+                      height="22" rx="6"
+                      fill="#F5AFCB"/>
+
+                <rect x="57" y="82" width="89"
+                      height="12" rx="3"
+                      fill="#FFF4F8"/>
+
+                <!-- HAPPY GRADUATION CAP -->
+
+                <path d="M35 39L100 12L165 39L100 67Z"
+                      fill="#7255B5"/>
+
+                <path d="M57 48V72Q100 94 143 72V48L100 67Z"
+                      fill="#9674CE"/>
+
+                <path d="M163 40V72"
+                      stroke="#D9A844"
+                      stroke-width="4"/>
+
+                <circle cx="163" cy="76"
+                        r="6" fill="#FFE19C"/>
+
+                <circle cx="88" cy="72"
+                        r="2.8" fill="#49345F"/>
+
+                <circle cx="111" cy="72"
+                        r="2.8" fill="#49345F"/>
+
+                <path d="M95 77Q100 82 105 77"
+                      fill="none"
+                      stroke="#49345F"
+                      stroke-width="2"
+                      stroke-linecap="round"/>
+
+                <circle cx="80" cy="77"
+                        r="4" fill="#F5AFCB"/>
+
+                <circle cx="119" cy="77"
+                        r="4" fill="#F5AFCB"/>
+
+                <!-- SPARKLES -->
+
+                <path d="M23 30v16M15 38h16"
+                      stroke="#D5A54A"
+                      stroke-width="3"
+                      stroke-linecap="round"/>
+
+                <path d="M177 94v14M170 101h14"
+                      stroke="#9674CE"
+                      stroke-width="3"
+                      stroke-linecap="round"/>
+
+            </svg>
+
+            <h3>Keep growing!</h3>
+
+            <p>
+                Every little step leads
+                to a brighter future.
+            </p>
+
+            <span class="study-tag">
+                ✦ Learn. Grow. Achieve.
+            </span>
+
+        </div>
+
+        <div id="connection"
+             class="connection checking"
+             role="status">
+
+            <span class="connection-dot"></span>
+
+            <div>
+                <strong id="connectionText">
+                    Connecting...
+                </strong>
+
+                <small>Cloud Firestore</small>
+            </div>
+
+        </div>
+
+        <div class="sidebar-footer">
+            EduTrack &copy; 2026
+            <br>
+            Made for academic excellence.
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- ==========================================
+     MAIN WORKSPACE
+=========================================== -->
+
+<main id="mainContent" class="main-content">
+
+    <!-- HEADER -->
+
+    <header class="topbar">
+
+        <div class="header-left">
+
+            <button id="menu"
+                    class="icon-button menu-button"
+                    aria-label="Toggle navigation"
+                    aria-expanded="true">
+
+                <svg class="icon">
+                    <use href="#icon-menu"></use>
+                </svg>
+
+            </button>
+
+            <div>
+
+                <p class="eyebrow">
+                    EDUTRACK
+                    <span class="breadcrumb-divider">/</span>
+                    WORKSPACE
+                </p>
+
+                <h1 id="heading">Dashboard</h1>
+
+                <p id="pageDescription"
+                   class="page-description">
+                    Your academic journey, beautifully organized.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="header-actions">
+
+            <div class="date-display">
+
+                <svg class="icon">
+                    <use href="#icon-calendar"></use>
+                </svg>
+
+                <span id="currentDate"></span>
+
+            </div>
+
+            <button id="themeToggle"
+                    class="icon-button theme-button"
+                    aria-label="Switch to dark mode"
+                    title="Change appearance">
+
+                <svg class="icon">
+                    <use id="themeIcon"
+                         href="#icon-moon"></use>
+                </svg>
+
+            </button>
+
+            <button id="refresh"
+                    class="icon-button refresh-button"
+                    aria-label="Refresh records"
+                    title="Refresh records">
+
+                <svg class="icon">
+                    <use href="#icon-refresh"></use>
+                </svg>
+
+            </button>
+
+            <div class="profile">
+
+                <div class="profile-avatar">ET</div>
+
+                <div class="profile-text">
+                    <strong>EduTrack</strong>
+                    <small>Academic Workspace</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ERROR MESSAGE -->
+
+    <div id="error"
+         class="error-banner"
+         role="alert"
+         hidden>
+    </div>
+
+
+    <!-- ======================================
+         DASHBOARD
+    ======================================= -->
+
+    <section id="dashboard"
+             class="page-section">
+
+        <div class="hero">
+
+            <div class="hero-decoration circle-one"></div>
+            <div class="hero-decoration circle-two"></div>
+
+            <div class="hero-content">
+
+                <div class="hero-badge">
+                    <svg class="icon">
+                        <use href="#icon-sparkles"></use>
+                    </svg>
+
+                    YOUR ACADEMIC JOURNEY
+                </div>
+
+                <h2>
+                    Learn today.
+                    <br>
+                    <span>Lead tomorrow.</span>
+                </h2>
+
+                <p>
+                    A brighter way to manage students,
+                    courses and enrollments in one
+                    connected academic workspace.
+                </p>
+
+                <button id="explore"
+                        class="hero-button">
+
+                    Explore students
+
+                    <svg class="icon">
+                        <use href="#icon-arrow"></use>
+                    </svg>
+
+                </button>
+
+            </div>
+
+
+            <!-- MAIN ACADEMIC SVG ILLUSTRATION -->
+
+            <div class="hero-art">
+
+                <svg viewBox="0 0 420 300"
+                     xmlns="http://www.w3.org/2000/svg"
+                     aria-hidden="true">
+
+                    <circle cx="225" cy="146"
+                            r="120"
+                            fill="#FFFFFF"
+                            opacity=".13"/>
+
+                    <circle cx="225" cy="146"
+                            r="95"
+                            fill="#FFFFFF"
+                            opacity=".09"/>
+
+                    <ellipse cx="220" cy="267"
+                             rx="140" ry="15"
+                             fill="#624296"
+                             opacity=".18"/>
+
+                    <!-- FLOATING STAR -->
+
+                    <g class="floating-star">
+
+                        <path d="M72 37L79 55L98 61
+                                 L79 67L72 86L65 67
+                                 L46 61L65 55Z"
+                              fill="#FFE19C"/>
+
+                    </g>
+
+                    <g class="floating-star delayed">
+
+                        <path d="M350 54L355 66L368 71
+                                 L355 76L350 89L345 76
+                                 L332 71L345 66Z"
+                              fill="#FDE9B4"/>
+
+                    </g>
+
+                    <!-- CLOUD -->
+
+                    <path d="M24 130
+                             Q12 109 36 105
+                             Q43 81 64 101
+                             Q91 90 99 114
+                             Q116 132 92 140H39
+                             Q24 140 24 130"
+                          fill="#FFFFFF"
+                          opacity=".55"/>
+
+                    <!-- BOOK STACK -->
+
+                    <g class="floating-books">
+
+                        <rect x="91" y="225"
+                              width="239" height="36"
+                              rx="10" fill="#FFE19C"/>
+
+                        <rect x="109" y="233"
+                              width="205" height="20"
+                              rx="5" fill="#FFF8E7"/>
+
+                        <path d="M120 240H302M120 246H290"
+                              stroke="#E8D7AD"
+                              stroke-width="2"/>
+
+                        <rect x="112" y="190"
+                              width="220" height="35"
+                              rx="9" fill="#A8DCCB"/>
+
+                        <rect x="128" y="197"
+                              width="189" height="21"
+                              rx="4" fill="#F3FFF9"/>
+
+                        <path d="M139 204H302M139 211H288"
+                              stroke="#D0E9DF"
+                              stroke-width="2"/>
+
+                        <rect x="83" y="157"
+                              width="230" height="34"
+                              rx="9" fill="#F5AFCB"/>
+
+                        <rect x="99" y="164"
+                              width="198" height="20"
+                              rx="4" fill="#FFF2F7"/>
+
+                        <path d="M110 171H284M110 178H269"
+                              stroke="#EED1DE"
+                              stroke-width="2"/>
+
+                        <path d="M273 157V182L282 176L291 182V157"
+                              fill="#E77DA8"/>
+
+                    </g>
+
+                    <!-- HAPPY GRADUATION CAP -->
+
+                    <g class="floating-cap">
+
+                        <path d="M100 88L205 43L316 88
+                                 L205 136Z"
+                              fill="#453366"/>
+
+                        <path d="M136 105V143
+                                 Q205 179 278 143V105
+                                 L205 136Z"
+                              fill="#6D519E"/>
+
+                        <path d="M205 88L313 89V145"
+                              stroke="#F6CD70"
+                              stroke-width="5"
+                              fill="none"
+                              stroke-linecap="round"/>
+
+                        <circle cx="313" cy="146"
+                                r="7" fill="#FFE19C"/>
+
+                        <path d="M307 150L302 170H324L319 150"
+                              fill="#F6CD70"/>
+
+                        <!-- CUTE FACE -->
+
+                        <circle cx="184" cy="145"
+                                r="4" fill="#302344"/>
+
+                        <circle cx="228" cy="145"
+                                r="4" fill="#302344"/>
+
+                        <ellipse cx="172" cy="153"
+                                 rx="7" ry="4"
+                                 fill="#F5AFCB"/>
+
+                        <ellipse cx="240" cy="153"
+                                 rx="7" ry="4"
+                                 fill="#F5AFCB"/>
+
+                        <path d="M199 153Q206 161 213 153"
+                              stroke="#302344"
+                              stroke-width="3"
+                              fill="none"
+                              stroke-linecap="round"/>
+
+                    </g>
+
+                    <!-- FLOATING PENCIL -->
+
+                    <g class="floating-pencil">
+
+                        <g transform="translate(344 151) rotate(22)">
+
+                            <rect x="0" y="0"
+                                  width="18" height="70"
+                                  rx="4" fill="#FFE19C"/>
+
+                            <rect x="0" y="0"
+                                  width="18" height="15"
+                                  rx="4" fill="#F5AFCB"/>
+
+                            <rect x="0" y="14"
+                                  width="18" height="7"
+                                  fill="#D9D4E4"/>
+
+                            <path d="M0 70L9 89L18 70Z"
+                                  fill="#E9C49D"/>
+
+                            <path d="M5 80L9 89L13 80Z"
+                                  fill="#453366"/>
+
+                        </g>
+
+                    </g>
+
+                    <!-- DECORATIVE DOTS -->
+
+                    <circle cx="53" cy="202"
+                            r="6" fill="#B8D9FA"/>
+
+                    <circle cx="379" cy="112"
+                            r="5" fill="#F5AFCB"/>
+
+                    <circle cx="145" cy="25"
+                            r="4" fill="#FFFFFF"/>
+
+                    <path d="M45 160v18M36 169h18"
+                          stroke="#FFFFFF"
+                          stroke-width="3"
+                          stroke-linecap="round"/>
+
+                </svg>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATISTICS -->
+
+        <div class="section-heading">
+
+            <div>
+                <p class="eyebrow">CAMPUS OVERVIEW</p>
+                <h2>Academic at a glance</h2>
+            </div>
+
+            <span class="live-label">
+                <span class="live-dot"></span>
+                Live records
+            </span>
+
+        </div>
+
+        <div id="stats"
+             class="stats-grid"
+             aria-live="polite">
+        </div>
+
+
+        <!-- ANALYTICS AND QUICK ACCESS -->
+
+        <div class="dashboard-grid">
+
+            <section class="panel analytics-panel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <p class="eyebrow">ACADEMIC ANALYTICS</p>
+                        <h2>Enrollment overview</h2>
+                        <p class="muted">
+                            Track enrollment status and progress.
+                        </p>
+                    </div>
+
+                    <span class="panel-icon lavender">
+                        <svg class="icon">
+                            <use href="#icon-enrollments"></use>
+                        </svg>
+                    </span>
+
+                </div>
+
+                <div id="overview"></div>
+
+            </section>
+
+
+            <section class="panel shortcuts-panel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <p class="eyebrow">QUICK ACCESS</p>
+                        <h2>Manage your campus</h2>
+                        <p class="muted">
+                            Everything is just a click away.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="quick-links">
+
+                    <button data-jump="students"
+                            class="quick-link quick-pink">
+
+                        <span class="quick-icon pink">
+                            <svg class="icon">
+                                <use href="#icon-students"></use>
+                            </svg>
+                        </span>
+
+                        <span class="quick-text">
+                            <strong>Student directory</strong>
+                            <small>Manage student information</small>
+                        </span>
+
+                        <svg class="icon quick-arrow">
+                            <use href="#icon-arrow"></use>
+                        </svg>
+
+                    </button>
+
+                    <button data-jump="courses"
+                            class="quick-link quick-blue">
+
+                        <span class="quick-icon blue">
+                            <svg class="icon">
+                                <use href="#icon-courses"></use>
+                            </svg>
+                        </span>
+
+                        <span class="quick-text">
+                            <strong>Course catalog</strong>
+                            <small>Organize academic programs</small>
+                        </span>
+
+                        <svg class="icon quick-arrow">
+                            <use href="#icon-arrow"></use>
+                        </svg>
+
+                    </button>
+
+                    <button data-jump="enrollments"
+                            class="quick-link quick-mint">
+
+                        <span class="quick-icon mint">
+                            <svg class="icon">
+                                <use href="#icon-enrollments"></use>
+                            </svg>
+                        </span>
+
+                        <span class="quick-text">
+                            <strong>Enrollment records</strong>
+                            <small>Monitor student enrollments</small>
+                        </span>
+
+                        <svg class="icon quick-arrow">
+                            <use href="#icon-arrow"></use>
+                        </svg>
+
+                    </button>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- RECENT ENROLLMENTS -->
+
+        <section class="panel recent-panel">
+
+            <div class="panel-heading">
+
+                <div>
+                    <p class="eyebrow">CAMPUS RECORDS</p>
+                    <h2>Recent enrollments</h2>
+                </div>
+
+                <button class="button button-soft"
+                        data-jump="enrollments">
+
+                    View all
+
+                    <svg class="icon">
+                        <use href="#icon-arrow"></use>
+                    </svg>
+
+                </button>
+
+            </div>
+
+            <div id="recentEnrollments"></div>
+
+        </section>
+
+
+        <!-- INSPIRATION BANNER -->
+
+        <div class="inspiration-banner">
+
+            <div class="inspiration-icon">
+
+                <svg class="icon">
+                    <use href="#icon-sparkles"></use>
+                </svg>
+
+            </div>
+
+            <div>
+                <h3>Small steps, big achievements.</h3>
+                <p>
+                    Stay organized, keep learning,
+                    and make every academic journey count.
+                </p>
+            </div>
+
+            <span class="inspiration-star">✦</span>
+
+        </div>
+
+    </section>
+
+
+    <!-- ======================================
+         RECORD MANAGEMENT
+    ======================================= -->
+
+    <section id="records"
+             class="page-section"
+             hidden>
+
+        <div id="moduleBanner"
+             class="module-banner">
+
+            <div>
+
+                <p class="eyebrow">
+                    ACADEMIC MANAGEMENT
+                </p>
+
+                <h2 id="moduleTitle">Student Directory</h2>
+
+                <p id="moduleDescription">
+                    Manage and organize academic records.
+                </p>
+
+            </div>
+
+            <div id="moduleIcon"
+                 class="module-art">
+            </div>
+
+        </div>
+
+
+        <section class="panel records-panel">
+
+            <div class="panel-heading records-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        MANAGE YOUR RECORDS
+                    </p>
+
+                    <h2 id="recordHeading">Records</h2>
+
+                    <p class="muted" id="recordSubtitle">
+                        Create, view, update and delete records.
+                    </p>
+
+                </div>
+
+                <button id="add"
+                        class="button button-primary">
+
+                    <svg class="icon">
+                        <use href="#icon-plus"></use>
+                    </svg>
+
+                    <span id="addText">Add record</span>
+
+                </button>
+
+            </div>
+
+
+            <!-- SEARCH AND FILTERS -->
+
+            <div class="toolbar">
+
+                <div class="search-box">
+
+                    <svg class="icon">
+                        <use href="#icon-search"></use>
+                    </svg>
+
+                    <input id="search"
+                           type="search"
+                           placeholder="Search records..."
+                           aria-label="Search records">
+
+                </div>
+
+                <select id="statusFilter"
+                        aria-label="Filter by status">
+
+                    <option value="">
+                        All statuses
+                    </option>
+
+                </select>
+
+                <div class="view-switch">
+
+                    <button id="tableView"
+                            class="view-button active"
+                            title="Table view"
+                            aria-label="Table view"
+                            aria-pressed="true">
+
+                        <svg class="icon">
+                            <use href="#icon-table"></use>
+                        </svg>
+
+                    </button>
+
+                    <button id="cardView"
+                            class="view-button"
+                            title="Card view"
+                            aria-label="Card view"
+                            aria-pressed="false">
+
+                        <svg class="icon">
+                            <use href="#icon-grid"></use>
+                        </svg>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOADING STATE -->
+
+            <div id="recordLoading"
+                 class="record-loading"
+                 hidden>
+
+                <div class="skeleton skeleton-line"></div>
+                <div class="skeleton skeleton-line"></div>
+                <div class="skeleton skeleton-line"></div>
+                <div class="skeleton skeleton-line"></div>
+
+            </div>
+
+
+            <!-- TABLE VIEW -->
+
+            <div id="tableContainer"
+                 class="table-wrap">
+
+                <table>
+
+                    <thead id="thead"></thead>
+
+                    <tbody id="tbody"></tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- CARD VIEW -->
+
+            <div id="cardContainer"
+                 class="record-cards"
+                 hidden>
+            </div>
+
+
+            <!-- EMPTY STATE -->
+
+            <div id="emptyState"
+                 class="empty-state"
+                 hidden>
+
+                <svg class="empty-art"
+                     viewBox="0 0 220 180"
+                     aria-hidden="true">
+
+                    <circle cx="110" cy="85"
+                            r="70" fill="#E9DFFF"/>
+
+                    <ellipse cx="110" cy="158"
+                             rx="72" ry="9"
+                             fill="#9674CE" opacity=".13"/>
+
+                    <path d="M34 62H83L97 77H182
+                             V145H34Z"
+                          fill="#B79AE8"/>
+
+                    <rect x="66" y="38"
+                          width="91" height="92"
+                          rx="9" fill="#FFFFFF"/>
+
+                    <path d="M83 58H140M83 72H133M83 86H121"
+                          stroke="#D8C9EF"
+                          stroke-width="5"
+                          stroke-linecap="round"/>
+
+                    <path d="M25 90H195L178 151H42Z"
+                          fill="#D5BFF6"/>
+
+                    <circle cx="93" cy="116"
+                            r="4" fill="#6D519E"/>
+
+                    <circle cx="127" cy="116"
+                            r="4" fill="#6D519E"/>
+
+                    <ellipse cx="83" cy="124"
+                             rx="6" ry="3"
+                             fill="#F5AFCB"/>
+
+                    <ellipse cx="137" cy="124"
+                             rx="6" ry="3"
+                             fill="#F5AFCB"/>
+
+                    <path d="M103 124Q110 131 117 124"
+                          stroke="#6D519E"
+                          stroke-width="3"
+                          fill="none"
+                          stroke-linecap="round"/>
+
+                    <path d="M27 32v18M18 41h18"
+                          stroke="#E6B956"
+                          stroke-width="3"
+                          stroke-linecap="round"/>
+
+                    <path d="M188 40v18M179 49h18"
+                          stroke="#9674CE"
+                          stroke-width="3"
+                          stroke-linecap="round"/>
+
+                </svg>
+
+                <h3 id="emptyTitle">
+                    No records yet
+                </h3>
+
+                <p id="emptyMessage">
+                    Start building your academic workspace.
+                </p>
+
+                <button id="emptyAction"
+                        class="button button-primary">
+                    Add your first record
+                </button>
+
+            </div>
+
+            <div class="table-footer">
+
+                <span id="count">
+                    0 records
+                </span>
+
+                <span>
+                    Powered by Cloud Firestore
+                </span>
+
+            </div>
+
+        </section>
+
+    </section>
+
+
+    <footer class="main-footer">
+
+        <span>
+            &copy; 2026 EduTrack — Candy Campus
+        </span>
+
+        <span>
+            Organized with care.
+            <span class="footer-heart">♥</span>
+        </span>
+
+    </footer>
+
+</main>
+
+
+<!-- ==========================================
+     ADD / EDIT / VIEW MODAL
+=========================================== -->
+
+<dialog id="modal" class="record-modal">
+
+    <form id="form">
+
+        <div class="modal-header">
+
+            <div class="modal-icon lavender">
+
+                <svg class="icon">
+                    <use id="modalIcon"
+                         href="#icon-plus"></use>
+                </svg>
+
+            </div>
+
+            <button type="button"
+                    id="close"
+                    class="icon-button"
+                    aria-label="Close dialog">
+
+                <svg class="icon">
+                    <use href="#icon-close"></use>
+                </svg>
+
+            </button>
+
+        </div>
+
+        <p class="eyebrow">ACADEMIC RECORD</p>
+
+        <h2 id="modalTitle">Add record</h2>
+
+        <p id="modalDescription"
+           class="muted">
+            Complete the information below.
+        </p>
+
+        <div id="fields"
+             class="form-fields">
+        </div>
+
+        <p id="formError"
+           class="form-error"
+           role="alert"
+           hidden>
+        </p>
+
+        <div class="modal-actions">
+
+            <button type="button"
+                    id="cancel"
+                    class="button button-cancel">
+
+                <svg class="icon">
+                    <use href="#icon-close"></use>
+                </svg>
+
+                <span id="cancelText">Cancel</span>
+
+            </button>
+
+            <button type="submit"
+                    id="save"
+                    class="button button-save">
+
+                <svg class="icon">
+                    <use href="#icon-check"></use>
+                </svg>
+
+                <span id="saveText">Save record</span>
+
+            </button>
+
+        </div>
+
+    </form>
+
+</dialog>
+
+
+<!-- ==========================================
+     DELETE CONFIRMATION
+=========================================== -->
+
+<dialog id="confirmDialog"
+        class="confirm-modal">
+
+    <div class="delete-illustration">
+
+        <svg class="icon">
+            <use href="#icon-delete"></use>
+        </svg>
+
+    </div>
+
+    <h2>Delete this record?</h2>
+
+    <p id="deleteMessage">
+        This record will be permanently removed.
+    </p>
+
+    <div class="confirmation-warning">
+        This action cannot be undone.
+    </div>
+
+    <div class="modal-actions">
+
+        <button id="keep"
+                class="button button-cancel">
+            Keep record
+        </button>
+
+        <button id="remove"
+                class="button button-delete">
+
+            <svg class="icon">
+                <use href="#icon-delete"></use>
+            </svg>
+
+            Delete record
+
+        </button>
+
+    </div>
+
+</dialog>
+
+
+<!-- ==========================================
+     TOAST NOTIFICATION
+=========================================== -->
+
+<div id="toast"
+     class="toast"
+     role="status"
+     aria-live="polite">
+
+    <div class="toast-icon">
+
+        <svg class="icon">
+            <use id="toastIcon"
+                 href="#icon-check"></use>
+        </svg>
+
+    </div>
+
+    <div>
+
+        <strong id="toastTitle">
+            Success!
+        </strong>
+
+        <p id="toastMessage"></p>
+
+    </div>
+
+    <button id="dismissToast"
+            class="toast-close"
+            aria-label="Dismiss notification">
+
+        <svg class="icon">
+            <use href="#icon-close"></use>
+        </svg>
+
+    </button>
+
+</div>
+
+
+<!-- MAIN JAVASCRIPT -->
+
+<script src="{{ url_for('static', filename='js/app.js') }}"
+        defer>
+</script>
+
+</body>
+
+</html>
